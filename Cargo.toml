@@ -1,0 +1,77 @@
+[package]
+name = "gis"
+version = "0.9.0"
+authors = ["guadev"]
+edition = "2018"
+build = "build.rs"
+readme = "README.md"
+homepage = "https://guasha.su"
+repository = "https://github.com/guasha-project/gis"
+exclude = ["guachain.db", "gis.toml"]
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+getopts = "0.2.21"
+log = "0.4.14"
+simplelog = "0.10"
+toml = "0.5.8"
+digest = "0.9.0"
+sha2 = "0.9.3"
+ed25519-dalek = "1.0"
+x25519-dalek = "1.1"
+chacha20poly1305 = "0.7.1"
+signature = "1.3.0"
+blakeout = "0.3.0"
+num_cpus = "1.13.0"
+byteorder = "1.4.3"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0.64"
+num-bigint = "0.4"
+num-traits = "0.2.14"
+chrono = { version = "0.4", features = ["serde"] }
+rand = "0.8.3"
+rand-old = { package = "rand", version = "0.7.0" } # For ed25519-dalek
+sqlite = "0.26.0"
+uuid = { version = "0.8.2", features = ["serde", "v4"] }
+mio = { version = "0.7", features = ["os-poll", "net"] }
+derive_more = "0.99" # for DNS from hermes
+
+# Optional dependencies regulated by features
+web-view = { version = "0.7", features = [], optional = true }
+tinyfiledialogs = { version = "3.3.10", optional = true }
+open = { version = "1.6.0", optional = true }
+
+[target.'cfg(windows)'.dependencies]
+winapi = { version = "0.3.7", features = ["impl-default", "wincon", "shellscalingapi"]}
+thread-priority = "0.2.1"
+
+[target.'cfg(target_os = "linux")'.dependencies]
+thread-priority = "0.2.1"
+
+[build-dependencies]
+minreq = { version = "2.3.1", features = ["punycode", "https-rustls"] }
+rust-crypto = "^0.2" # TODO change to sha2
+winres = "0.1"
+
+[dev-dependencies]
+serde_bytes = "0.11.5"
+serde_derive = "1.0.124"
+
+[profile.release]
+opt-level = 3
+lto = true
+
+[profile.dev]
+opt-level = 2
+
+[profile.test]
+opt-level = 2
+
+[package.metadata.winres]
+ProductName="GIS"
+FileDescription="Guasha Identity System"
+
+[features]
+webgui = ["web-view", "tinyfiledialogs", "open"]
+edge = ["web-view/edge"]
+default = ["webgui"]

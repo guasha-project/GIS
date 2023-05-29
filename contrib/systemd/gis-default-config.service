@@ -1,0 +1,13 @@
+[Unit]
+Description=GIS default config generator
+ConditionPathExists=|!/etc/gis.conf
+ConditionFileNotEmpty=|!/etc/gis.conf
+Wants=local-fs.target
+After=local-fs.target
+
+[Service]
+Type=oneshot
+Group=gis
+StandardOutput=file:/etc/gis.conf
+ExecStart=/usr/bin/gis -g
+ExecStartPost=/usr/bin/chmod 0640 /etc/gis.conf

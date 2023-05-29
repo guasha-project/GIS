@@ -1,0 +1,13 @@
+[Desktop Entry]
+Categories=Network;P2P;
+Exec=gis %U
+GenericName=Gis client
+Comment=Guasha Identity System
+Icon=gis
+MimeType=application/x-gis;
+Name=Gis
+Terminal=false
+Type=Application
+StartupNotify=false
+StartupWMClass=gis
+Keywords=dns;p2p;

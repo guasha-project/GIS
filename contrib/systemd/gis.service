@@ -1,0 +1,27 @@
+[Unit]
+Description=gis
+Wants=network.target
+Wants=gis-default-config.service
+After=network.target
+After=gis-default-config.service
+
+[Service]
+User=gis
+Group=gis
+
+ProtectHome=true
+ProtectSystem=true
+
+SecureBits=keep-caps
+CapabilityBoundingSet=CAP_NET_BIND_SERVICE
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+
+SyslogIdentifier=gis
+WorkingDirectory=/var/lib/gis
+ExecStart=/usr/bin/gis -n -c /etc/gis.conf
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=always
+TimeoutStopSec=5
+
+[Install]
+WantedBy=multi-user.target

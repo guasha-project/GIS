@@ -1,0 +1,140 @@
+html {
+  overflow-y: hidden;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+.main {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+  padding-top: 10pt;
+}
+
+.main .row {
+  /*border: 1px dotted grey;*/
+}
+
+.main .row.header {
+  flex: 0 1 auto;
+  min-height: 42px;
+}
+
+.main .row.page {
+  display: flex;
+  flex-flow: column;
+  flex: 1 1 auto;
+  margin-left: 10pt;
+  margin-right: 10pt;
+  overflow-y: auto;
+  padding: 0.2rem;
+}
+
+.main .row.status {
+  flex: 0 1 auto;
+  background-color: #f4f4f4;
+  padding: 0.2rem 0.5rem 0.2rem 0.5rem;
+}
+
+/* ========================================== */
+
+@media screen and (min-width: 769px) {
+  .modal-content,
+  .modal-card {
+    width: 100%;
+    max-width: calc(100vw - 60px);
+  }
+}
+
+.modal-background {
+  background-color: rgba(10, 10, 10, 0.76);
+}
+
+#new_domain_dialog_box {
+  min-height: 380px;
+}
+
+.delete {
+  position: absolute;
+  top: 1.0rem;
+  right: 1.25rem;
+}
+
+.container {
+  margin: 10pt;
+}
+
+.textarea {
+  overflow-y: auto;
+}
+
+.message {
+  min-height: 2rem;
+}
+
+.notification {
+  position: absolute;
+  z-index: 100;
+  width: 50%;
+}
+
+.notification.is-warning {
+  position: absolute;
+  top: 10pt;
+  right: 10pt;
+}
+
+.notification.is-success {
+  position: absolute;
+  bottom: 30pt;
+  right: 10pt;
+}
+
+.container.is-fluid.cards-container {
+  display: flex;
+  flex-grow: 0;
+  /*gap: .8em; supported only in Firefox/Edge/Chrome */
+  justify-content: center !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.container.is-fluid.cards-container .card:not(:last-child) {
+  margin-right: 0.8rem;
+}
+
+.list {
+  overflow-y: auto;
+}
+
+path {
+  fill: #4a4a4a;
+}
+
+.tabs > ul > li.is-active > a > span.icon > svg > path {
+  fill: #3273dc;
+}
+
+.control > span.icon > svg > path {
+  fill: #dbdbdb;
+}
+
+.is-danger > span.icon > svg > path {
+  fill: #f14668;
+}
+
+.is-danger:hover > span.icon > svg > path {
+  fill: #ffffff;
+}
+
+svg.tag-button {
+  width: 24px;
+  height: 24px;
+  margin-bottom: .5rem;
+}

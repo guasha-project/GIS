@@ -1,0 +1,40 @@
+pkgname=gis
+pkgver=$(sh ./semver/version.sh --bare)
+pkgrel=1
+pkgdesc="Guasha Identity System"
+arch=('x86_64' 'aarch64')
+license=('AGPL3')
+url='https://github.com/guasha-project/GIS'
+depends=('webkit2gtk' 'gtk3')
+makedepends=('cargo' 'rust' 'atk' 'pango')
+backup=("etc/$pkgname.conf")
+
+build() {
+	cd "$startdir/.."
+
+	cargo build --release --all-features --target-dir=target
+}
+
+package() {
+	cd "$startdir/.."
+
+	install -Dm 755 "target/release/$pkgname" "$pkgdir/usr/bin/$pkgname"
+
+	install -Dm 644 "contrib/systemd/$pkgname.service"  "$pkgdir/usr/lib/systemd/system/$pkgname.service"
+	install -Dm 644 "contrib/systemd/$pkgname.sysusers" "$pkgdir/usr/lib/sysusers.d/$pkgname.conf"
+	install -Dm 644 "contrib/systemd/$pkgname.tmpfiles" "$pkgdir/usr/lib/tmpfiles.d/$pkgname.conf"
+
+	install -Dm 644 "contrib/org.gis.Gis.desktop" "$pkgdir/usr/share/applications/org.gis.Gis.desktop"
+
+	install -Dm 644 "img/logo/16px.png"  "$pkgdir/usr/share/icons/hicolor/16x16/apps/gis.png"
+	install -Dm 644 "img/logo/22px.png"  "$pkgdir/usr/share/icons/hicolor/22x22/apps/gis.png"
+	install -Dm 644 "img/logo/24px.png"  "$pkgdir/usr/share/icons/hicolor/24x24/apps/gis.png"
+	install -Dm 644 "img/logo/32px.png"  "$pkgdir/usr/share/icons/hicolor/32x32/apps/gis.png"
+	install -Dm 644 "img/logo/36px.png"  "$pkgdir/usr/share/icons/hicolor/36x36/apps/gis.png"
+	install -Dm 644 "img/logo/48px.png"  "$pkgdir/usr/share/icons/hicolor/48x48/apps/gis.png"
+	install -Dm 644 "img/logo/64px.png"  "$pkgdir/usr/share/icons/hicolor/64x64/apps/gis.png"
+	install -Dm 644 "img/logo/72px.png"  "$pkgdir/usr/share/icons/hicolor/72x72/apps/gis.png"
+	install -Dm 644 "img/logo/96px.png"  "$pkgdir/usr/share/icons/hicolor/96x96/apps/gis.png"
+	install -Dm 644 "img/logo/128px.png" "$pkgdir/usr/share/icons/hicolor/128x128/apps/gis.png"
+	install -Dm 644 "img/logo/192px.png" "$pkgdir/usr/share/icons/hicolor/192x192/apps/gis.png"
+}
