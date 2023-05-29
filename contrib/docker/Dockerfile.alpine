@@ -1,0 +1,23 @@
+FROM alpine:3.18
+
+LABEL Description="Guasha Identity System"
+LABEL URL="https://github.com/guasha-project/GIS/releases"
+
+ARG arch=amd64
+ARG srv_port=46866
+ARG dns_port=53
+
+RUN apk add --no-cache curl && \
+    curl -SsL "https://github.com/guasha-project/GIS/releases/download/$(curl --silent "https://api.github.com/repos/guasha-project/GIS/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')/gis-linux-${arch}-$(curl --silent "https://api.github.com/repos/guasha-project/GIS/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')-nogui" -o /usr/bin/gis && \
+    chmod a+x /usr/bin/gis && \
+    apk del curl
+
+RUN /usr/bin/gis -g > /etc/gis.conf
+
+EXPOSE ${srv_port}
+EXPOSE ${dns_port}
+EXPOSE ${dns_port}/udp
+
+WORKDIR /var/lib/gis
+
+CMD ["/usr/bin/gis", "-n", "-c", "/etc/gis.conf"]
