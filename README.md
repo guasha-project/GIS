@@ -1,6 +1,6 @@
 # ![](/img/logo/32px.png) Gis
 
-![Builds](https://github.com/Revertron/Alfis/actions/workflows/rust_build_and_test.yml/badge.svg)
+
 
 Guasha Identity System
 
