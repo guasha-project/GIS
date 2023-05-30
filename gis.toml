@@ -8,9 +8,9 @@ check_blocks = 8
 # Network settings
 [net]
 # All bootstap nodes
-peers = ["test-ip4.alfis.name:4244", "test-ip6.alfis.name:4244"]
+peers = []
 # Your node will listen on that address for other nodes to connect
-listen = "[::]:4244"
+listen = "[::]:46866"
 # Set true if you want your IP to participate in peer-exchange, or false otherwise
 public = true
 # Allow connections to/from Yggdrasil only (https://yggdrasil-network.github.io)
